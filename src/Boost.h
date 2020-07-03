@@ -9,10 +9,8 @@
 #include <boost/numeric/ublas/operation.hpp>
 
 template<typename T>
-Matrix<T> __attribute__ ((noinline)) boost_axpy_mul(const Matrix<T> &A, const Matrix<T> &B) {
-    Matrix<T> C(A.size1(), B.size2(), 0);
+void __attribute__ ((noinline)) boost_axpy_mul(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
     boost::numeric::ublas::axpy_prod(A, B, C);
-    return C;
 }
 
 template<typename T>

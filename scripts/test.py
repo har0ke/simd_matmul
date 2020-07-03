@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import argparse
 import json
 import os
 import shutil
@@ -28,7 +29,8 @@ def compile_and_run(source_path, build_path_prefix, target, native, use_clang, a
         "-DNDEBUG=ON", "-DBOOST_UBLAS_NDEBUG=ON"
     ]
     build_path = os.path.join(build_path_prefix, " ".join(flags))
-    os.makedirs(build_path, exist_ok=True)
+    if not os.path.exists(build_path):
+        os.makedirs(build_path)
     check_call_quiet(["cmake", "-B", build_path, "-S", source_path] + flags)
     check_call_quiet(["make", target], cwd=build_path)
     if False:
@@ -39,37 +41,68 @@ def compile_and_run(source_path, build_path_prefix, target, native, use_clang, a
         output = subprocess.check_output([os.path.join(build_path, target)] + args)
         return output
 
-
+very_slow_functions = ["naive_reordered", "divide_and_conquer_naive_r4", "divide_and_conquer_naive_r2", "divide_and_conquer_naive_r1"]
+slow_functions = ["boost_axpy_mul", "divide_and_conquer_naive_r3", "divide_and_conquer_naive_r5"]
+normal_functions = ["block_wise_avx2"]
+fast_functions = ["divide_and_conquer_block_avx2", "blas"]
+avx512_functions = ["block_wise_avx512", "divide_and_conquer_block_avx512"]
 
 if __name__ == '__main__':
     os.chdir(os.path.join(os.path.dirname(__file__), ".."))
-    os.makedirs("data", exist_ok=True)
+    if not os.path.exists("data"):
+        os.makedirs("data")
     os.chdir("data")
     with_double = False
-    extra_args = []#["--validate"]
 
-    total = float(sys.argv[1] if len(sys.argv) > 1 else 1e8)
-    sss= []
+    parser = argparse.ArgumentParser()
+    parser.add_argument("total_size", type=float)
+    parser.add_argument("--very_slow", action="store_true")
+    parser.add_argument("--slow", action="store_true")
+    parser.add_argument("--normal", action="store_true")
+    parser.add_argument("--avx512", action="store_true")
+    parser.add_argument("--validate", action="store_true")
+    parser.add_argument("--double", action="store_true")
+    parser.add_argument("--function", type=str, nargs="*")
+
+    options = parser.parse_args()
+
+    functions = fast_functions
+
+    if options.very_slow:
+        functions += very_slow_functions
+
+    if options.very_slow or options.slow:
+        functions += slow_functions
+
+    if options.very_slow or options.slow or options.normal:
+        functions += normal_functions
+
+    if options.avx512:
+        functions += avx512_functions
+
+    if options.function:
+        functions = options.function
+
+    extra_args = []
+    if options.validate:
+        extra_args.append("--validate")
+    if options.double:
+        extra_args.append("--double")
+
+    total = options.total_size
+    matrix_combinations = []
     i = pow(total, 1. / 3.)
     for _ in range(20):
-        a = round(max(0.01 * i + 1, numpy.random.normal(i, i / 2)))
-        b = round(max(0.01 * i + 1, numpy.random.normal(i, i / 2)))
+        a = int(round(max(0.01 * i + 1, numpy.random.normal(i, i / 2))))
+        b = int(round(max(0.01 * i + 1, numpy.random.normal(i, i / 2))))
+        c = int(round(total / a / b))
+        matrix_combinations.append([str(a), str(b), str(c)])
 
-        c = round(total / a / b)
-        sss.append([str(a), str(b), str(c)])
-
-    functions = ["block_wise_256_f", "block_wise_256_f2", "boost_axpy_mul",
-                  "divide_and_conquer_block1", "divide_and_conquer_block2", "divide_and_conquer_naive_r3",
-                  "blas"]
-    if total < 1e10:
-        functions.append("naive_reordered")
     times = [[] for f in functions]
     output_file = datetime.now().strftime("%Y.%m.%d_%H-%M-%S.json")
     for clang in [True]:
-        for sizes in sss:
+        for sizes in matrix_combinations:
             args = list(sizes)
-            if with_double:
-                args.append("--double")
             compile_and_run("..", "builds", "generate_random", True, True, args)
             folder = "x".join(sizes)
             for fidx, function in enumerate(functions):
@@ -88,8 +121,9 @@ if __name__ == '__main__':
             print(["%.3f" % numpy.mean(ts) for ts in times])
             with open(output_file + ".cache", "w") as f:
                 json.dump({
+                    "extr_args": extra_args,
                     "times": times,
-                    "sizes": sss,
+                    "sizes": matrix_combinations,
                     "functions": functions,
                     "means": ["%.3f" % numpy.mean(ts) for ts in times]
                 }, f)

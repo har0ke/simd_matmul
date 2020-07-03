@@ -102,17 +102,19 @@ struct multiplier_naive_functor {
             }
             return;
         }
-        _naive_reordered(C, A, B);
+        naive_reordered(C, A, B);
     }
 };
 
 
-template<typename FloatType>
-struct multiplier_block_wise_256 : block_wise_256<FloatType> {
+template<typename FloatType, AvxVersion version>
+struct multiplier_block_wise : block_wise<FloatType, version> {
 
-    static constexpr unsigned SplitMultipleM = 5 * block_wise_256<FloatType>::NumRows;
+    typedef block_wise<FloatType, version> Base;
+
+    static constexpr unsigned SplitMultipleM = 5 * Base::NumRows;
     static constexpr unsigned SplitMultipleP = 20;
-    static constexpr unsigned SplitMultipleN = block_wise_256<FloatType>::NumColumns;
+    static constexpr unsigned SplitMultipleN = Base::NumColumns;
 
     static SplitAction action(unsigned m, unsigned p, unsigned n) {
         size_t m_p = m / SplitMultipleM;
@@ -138,89 +140,43 @@ struct multiplier_block_wise_256 : block_wise_256<FloatType> {
 
 };
 
-template<typename FloatType>
-struct multiplier_block_wise_256_alternative : block_wise_256_alternative<FloatType> {
-
-    static constexpr unsigned SplitMultipleM = 5 * block_wise_256<FloatType>::NumRows;
-    static constexpr unsigned SplitMultipleP = 20;
-    static constexpr unsigned SplitMultipleN = block_wise_256<FloatType>::NumColumns;
-
-    static SplitAction action(unsigned m, unsigned p, unsigned n) {
-        size_t m_p = m / SplitMultipleM;
-        size_t p_p = p / SplitMultipleP;
-        size_t n_p = n / SplitMultipleN;
-        unsigned _SplitMultipleM = SplitMultipleM;
-        unsigned _SplitMultipleP = 1;
-        unsigned _SplitMultipleN = SplitMultipleN;
-
-        auto max_dim = std::max(m_p, std::max(p_p, n_p));
-        if (m <= SplitMultipleM && n <= SplitMultipleN) {
-            return DoNotSplit;
-        } else if (max_dim == m_p) {
-            return SplitA;
-        } else if (max_dim == n_p) {
-            return SplitB;
-        } else if (p > SplitMultipleP){
-            return SplitBoth;
-        } else {
-            return DoNotSplit;
-        }
-    }
-};
-
-
-template<>
-struct block_wise_256<float>;
 
 template<typename T>
-Matrix<T> __attribute__ ((noinline)) divide_and_conquer_naive_r1(const Matrix<T> &A, const Matrix<T> &B) {
-    Matrix<T> C(A.size1(), B.size2(), 0);
+void __attribute__ ((noinline)) divide_and_conquer_naive_r1(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
     _divide_and_conquer<multiplier_naive_functor<5, 5>>(C, A, B);
-    return C;
 }
 
 template<typename T>
-Matrix<T> __attribute__ ((noinline)) divide_and_conquer_naive_r2(const Matrix<T> &A, const Matrix<T> &B) {
-    Matrix<T> C(A.size1(), B.size2(), 0);
+void __attribute__ ((noinline)) divide_and_conquer_naive_r2(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
     _divide_and_conquer<multiplier_naive_functor<50, 50>>(C, A, B);
-    return C;
 }
 
 template<typename T>
-Matrix<T> __attribute__ ((noinline)) divide_and_conquer_naive_r3(const Matrix<T> &A, const Matrix<T> &B) {
-    Matrix<T> C(A.size1(), B.size2(), 0);
+void __attribute__ ((noinline)) divide_and_conquer_naive_r3(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
     _divide_and_conquer<multiplier_naive_functor<200, 200>>(C, A, B);
-    return C;
 }
 
 template<typename T>
-Matrix<T> __attribute__ ((noinline)) divide_and_conquer_naive_r4(const Matrix<T> &A, const Matrix<T> &B) {
-    Matrix<T> C(A.size1(), B.size2(), 0);
+void __attribute__ ((noinline)) divide_and_conquer_naive_r4(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
     _divide_and_conquer<multiplier_naive_functor<500, 500>>(C, A, B);
-    return C;
 }
 
 template<typename T>
-Matrix<T> __attribute__ ((noinline)) divide_and_conquer_naive_r5(const Matrix<T> &A, const Matrix<T> &B) {
-    Matrix<T> C(A.size1(), B.size2(), 0);
+void __attribute__ ((noinline)) divide_and_conquer_naive_r5(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
     _divide_and_conquer<multiplier_naive_functor<1000, 1000>>(C, A, B);
-    return C;
 }
 
 template<typename T>
-Matrix<T> __attribute__ ((noinline)) divide_and_conquer_block1(const Matrix<T> &A, const Matrix<T> &B) {
-    Matrix<T> C(A.size1(), B.size2(), 0);
-    auto nr = block_wise_256<T>::NumRows;
-    auto nc = block_wise_256<T>::NumColumns;
-    _divide_and_conquer<multiplier_block_wise_256<T>>(C, A, B);
-    return C;
+void __attribute__ ((noinline)) divide_and_conquer_block_avx2(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
+    _divide_and_conquer<multiplier_block_wise<T, AVX2>>(C, A, B);
 }
 
+
+#ifdef WITH_AVX512
 template<typename T>
-Matrix<T> __attribute__ ((noinline)) divide_and_conquer_block2(const Matrix<T> &A, const Matrix<T> &B) {
-    Matrix<T> C(A.size1(), B.size2(), 0);
-    _divide_and_conquer<multiplier_block_wise_256_alternative<T>>(C, A, B);
-    return C;
+void __attribute__ ((noinline)) divide_and_conquer_block_avx512(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
+    _divide_and_conquer<multiplier_block_wise<T, AVX512>>(C, A, B);
 }
+#endif
 
 #endif //SMID_MATRIX_DEVIDEANDCONQUER_H

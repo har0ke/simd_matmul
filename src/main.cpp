@@ -12,12 +12,13 @@ using namespace std::chrono;
 namespace po = boost::program_options;
 
 template<typename T>
-using BinaryMatrixOp = Matrix<T> (*)(const Matrix<T> &A, const Matrix<T> &B);
+using BinaryMatrixOp = void (*)(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B);
 
 template<typename T>
 Matrix<T> run_function(BinaryMatrixOp<T> f, const Matrix<T> &A, const Matrix<T> &B) {
+    Matrix<T> C(A.size1(), B.size2(), 0);
     auto a = steady_clock::now();
-    auto C = f(A, B);
+    f(C, A, B);
     auto b = steady_clock::now();
     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(b - a).count();
     if (ms > 1000) {
@@ -49,27 +50,32 @@ int main_work(const std::string &test_function_name, const std::string &input_fo
 
     // use the result to prevent compiler to optimize...
     double use_result = 0;
-    /*TEST_IF(test_function_name, naive, A, B)
-    TEST_IF(test_function_name, boost_blocked_mul_64, A, B)
-    TEST_IF(test_function_name, boost_blocked_mul_256, A, B)
-    TEST_IF(test_function_name, boost_mul, A, B)
-    TEST_IF(test_function_name, divide_and_conquer_naive_r1, A, B)
-    TEST_IF(test_function_name, divide_and_conquer_naive_r2, A, B)
-    TEST_IF(test_function_name, divide_and_conquer_naive_r4, A, B)
-    TEST_IF(test_function_name, divide_and_conquer_naive_r5, A, B)*/
 
     TEST_IF(test_function_name, naive_reordered, A, B)
-    TEST_IF(test_function_name, block_wise_256_f, A, B)
-    TEST_IF(test_function_name, block_wise_256_f2, A, B)
+    TEST_IF(test_function_name, block_wise_avx2, A, B)
+
+#ifdef WITH_AVX512
+    TEST_IF(test_function_name, block_wise_avx512, A, B)
+#endif
+
     TEST_IF(test_function_name, boost_axpy_mul, A, B)
-    TEST_IF(test_function_name, divide_and_conquer_block1, A, B)
-    TEST_IF(test_function_name, divide_and_conquer_block2, A, B)
+    TEST_IF(test_function_name, divide_and_conquer_block_avx2, A, B)
+
+#ifdef WITH_AVX512
+    TEST_IF(test_function_name, divide_and_conquer_block_avx512, A, B)
+#endif
+
+    TEST_IF(test_function_name, divide_and_conquer_naive_r1, A, B)
+    TEST_IF(test_function_name, divide_and_conquer_naive_r2, A, B)
     TEST_IF(test_function_name, divide_and_conquer_naive_r3, A, B)
+    TEST_IF(test_function_name, divide_and_conquer_naive_r4, A, B)
+    TEST_IF(test_function_name, divide_and_conquer_naive_r5, A, B)
     TEST_IF(test_function_name, blas, A, B)
 
     if(validate) {
         std::cout << "Validating matrix" << std::endl;
-        auto C2 = boost_axpy_mul(A, B);
+        Matrix<FloatType> C2(A.size1(), B.size2(), 0);
+        boost_axpy_mul(C2, A, B);
         if(C.size1() != C2.size1() || C.size2() != C2.size2())
             throw std::runtime_error("Result matrix has invalid size.");
         for(auto i = 0; i < C2.size1(); ++i) {

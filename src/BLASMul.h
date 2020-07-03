@@ -32,10 +32,8 @@ struct blas_functor<double> {
 };
 
 template<typename T>
-Matrix<T> blas(const Matrix<T> &A, const Matrix<T> &B) {
-    Matrix<T> C(A.size1(), B.size2(), 0);
+void blas(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
     blas_functor<T>::multiply(C, A, B);
-    return C;
 }
 
 #endif //SMID_MATRIX_BLASMUL_H

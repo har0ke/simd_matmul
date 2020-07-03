@@ -45,6 +45,7 @@ find_package(Boost REQUIRED COMPONENTS filesystem program_options)
 
 include_directories("${Boost_INCLUDE_DIRS}")
 
+message("${Boost_LIBRARIES} ${BLAS_LIBRARIES}")
 add_library(simple_matrix src/Matrix.cpp)
 target_link_libraries(simple_matrix ${Boost_LIBRARIES} ${BLAS_LIBRARIES})
 

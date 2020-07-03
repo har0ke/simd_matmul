@@ -21,9 +21,8 @@ a = [
 def get_i(x):
     return np.array([(i[0], float(i[x + 1])) for i in a if len(i) > x  + 1])
 
-functions =  ["block_wise_256_f", "block_wise_256_f2", "boost_axpy_mul",
-              "divide_and_conquer_block1", "divide_and_conquer_block2", "divide_and_conquer_naive_r3",
-              "blas", "naive_reordered"]
+[1e9,          '172.500',         '166.250',           '163.900',        '127.100',                   '117.100',                   '686.450',                     '35.100', '808.800'],
+functions =  ["block_wise_256_f", "block_wise_256_f2", "boost_axpy_mul", "divide_and_conquer_block1", "divide_and_conquer_block2", "divide_and_conquer_naive_r3", "blas",   "naive_reordered"]
 
 for i, f in list(enumerate(functions)):
     xy = get_i(i)
