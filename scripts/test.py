@@ -21,12 +21,13 @@ def check_call_quiet(*args, **kwargs):
         exit(0)
 
 
-def compile_and_run(source_path, build_path_prefix, target, native, use_clang, args):
+def compile_and_run(source_path, build_path_prefix, target, native, use_clang, avx512, args):
     flags = [
         "-DOPTIMIZE_FOR_NATIVE=" + ("ON" if native else "OFF"),
         "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
         "-DUSE_CLANG=" + ("ON" if use_clang else "OFF"),
-        "-DNDEBUG=ON", "-DBOOST_UBLAS_NDEBUG=ON"
+        "-DNDEBUG=ON", "-DBOOST_UBLAS_NDEBUG=ON",
+        "-DWITH_AVX512=" + ("ON" if avx512 else "OFF"),
     ]
     build_path = os.path.join(build_path_prefix, " ".join(flags))
     if not os.path.exists(build_path):
@@ -103,13 +104,13 @@ if __name__ == '__main__':
     for clang in [True]:
         for sizes in matrix_combinations:
             args = list(sizes)
-            compile_and_run("..", "builds", "generate_random", True, True, args)
+            compile_and_run("..", "builds", "generate_random", True, True, options.avx512, args)
             folder = "x".join(sizes)
             for fidx, function in enumerate(functions):
                 arguments = [folder, "--algorithm", function]
                 if with_double:
                     arguments.append("--double")
-                output = compile_and_run("..", "builds", "simd_multiply", True, clang, arguments + extra_args)
+                output = compile_and_run("..", "builds", "simd_multiply", True, clang, options.avx512, arguments + extra_args)
                 ms = output.decode()[output.decode().find("multiply:") + 10:]
                 if "ms\n" in ms:
                     ms = float(ms.split("ms\n")[0])

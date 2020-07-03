@@ -5,9 +5,14 @@ include(CheckCXXCompilerFlag)
 set(CMAKE_CXX_STANDARD 17)
 option(OPTIMIZE_FOR_NATIVE "Build with -march=native" ON)
 option(USE_CLANG "Build with clang instead of gcc" ON)
+option(WITH_AVX512 "Enable AVX512" OFF)
 set(DEFAULT_TEST_FUNCTION_NAME "native_reordered" CACHE STRING "default function to run")
 
 add_compile_definitions(DEFAULT_TEST_FUNCTION_NAME="${DEFAULT_TEST_FUNCTION_NAME}")
+
+if(WITH_AVX512)
+    add_compile_definitions(WITH_AVX512)
+endif()
 
 if(USE_CLANG)
     set(CMAKE_CXX_COMPILER "clang++")
