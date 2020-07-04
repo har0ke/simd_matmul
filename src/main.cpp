@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cassert>
 #include <boost/program_options.hpp>
-#include "RegisterBlocking.h"
+#include "register_blocking/RegisterBlocking.h"
 #include "Boost.h"
 #include "Naive.h"
 #include "DevideAndConquer.h"
@@ -52,6 +52,7 @@ int main_work(const std::string &test_function_name, const std::string &input_fo
     double use_result = 0;
 
     TEST_IF(test_function_name, naive_reordered, A, B)
+    TEST_IF(test_function_name, block_wise_sse, A, B)
     TEST_IF(test_function_name, block_wise_avx2, A, B)
 
 #ifdef WITH_AVX512
@@ -59,6 +60,7 @@ int main_work(const std::string &test_function_name, const std::string &input_fo
 #endif
 
     TEST_IF(test_function_name, boost_axpy_mul, A, B)
+    TEST_IF(test_function_name, divide_and_conquer_block_sse, A, B)
     TEST_IF(test_function_name, divide_and_conquer_block_avx2, A, B)
 
 #ifdef WITH_AVX512

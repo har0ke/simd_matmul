@@ -17,7 +17,7 @@ def check_call_quiet(*args, **kwargs):
     rc = p.returncode
     if rc != 0:
         print(output.decode())
-        print(err)
+        print(err.decode())
         exit(0)
 
 
@@ -44,7 +44,7 @@ def compile_and_run(source_path, build_path_prefix, target, native, use_clang, a
 
 very_slow_functions = ["naive_reordered", "divide_and_conquer_naive_r4", "divide_and_conquer_naive_r2", "divide_and_conquer_naive_r1"]
 slow_functions = ["boost_axpy_mul", "divide_and_conquer_naive_r3", "divide_and_conquer_naive_r5"]
-normal_functions = ["block_wise_avx2"]
+normal_functions = ["block_wise_sse", "block_wise_avx2", "divide_and_conquer_block_sse"]
 fast_functions = ["divide_and_conquer_block_avx2", "blas"]
 avx512_functions = ["block_wise_avx512", "divide_and_conquer_block_avx512"]
 
@@ -63,6 +63,7 @@ if __name__ == '__main__':
     parser.add_argument("--avx512", action="store_true")
     parser.add_argument("--validate", action="store_true")
     parser.add_argument("--double", action="store_true")
+    parser.add_argument("--gcc", action="store_true")
     parser.add_argument("--function", type=str, nargs="*")
 
     options = parser.parse_args()
@@ -101,31 +102,31 @@ if __name__ == '__main__':
 
     times = [[] for f in functions]
     output_file = datetime.now().strftime("%Y.%m.%d_%H-%M-%S.json")
-    for clang in [True]:
-        for sizes in matrix_combinations:
-            args = list(sizes)
-            compile_and_run("..", "builds", "generate_random", True, True, options.avx512, args)
-            folder = "x".join(sizes)
-            for fidx, function in enumerate(functions):
-                arguments = [folder, "--algorithm", function]
-                if with_double:
-                    arguments.append("--double")
-                output = compile_and_run("..", "builds", "simd_multiply", True, clang, options.avx512, arguments + extra_args)
-                ms = output.decode()[output.decode().find("multiply:") + 10:]
-                if "ms\n" in ms:
-                    ms = float(ms.split("ms\n")[0])
-                else:
-                    ms = float(ms.split("s\n")[0]) * 1000
-                times[fidx].append(ms)
+    clang = not options.gcc
+    for sizes in matrix_combinations:
+        args = list(sizes)
+        compile_and_run("..", "builds", "generate_random", True, True, options.avx512, args)
+        folder = "x".join(sizes)
+        for fidx, function in enumerate(functions):
+            arguments = [folder, "--algorithm", function]
+            if with_double:
+                arguments.append("--double")
+            output = compile_and_run("..", "builds", "simd_multiply", True, clang, options.avx512, arguments + extra_args)
+            ms = output.decode()[output.decode().find("multiply:") + 10:]
+            if "ms\n" in ms:
+                ms = float(ms.split("ms\n")[0])
+            else:
+                ms = float(ms.split("s\n")[0]) * 1000
+            times[fidx].append(ms)
 
-            shutil.rmtree(folder)
-            print(["%.3f" % numpy.mean(ts) for ts in times])
-            with open(output_file + ".cache", "w") as f:
-                json.dump({
-                    "extr_args": extra_args,
-                    "times": times,
-                    "sizes": matrix_combinations,
-                    "functions": functions,
-                    "means": ["%.3f" % numpy.mean(ts) for ts in times]
-                }, f)
-            os.rename(output_file + ".cache", output_file)
+        shutil.rmtree(folder)
+        print(["%.3f" % numpy.mean(ts) for ts in times])
+        with open(output_file + ".cache", "w") as f:
+            json.dump({
+                "extr_args": extra_args,
+                "times": times,
+                "sizes": matrix_combinations,
+                "functions": functions,
+                "means": ["%.3f" % numpy.mean(ts) for ts in times]
+            }, f)
+        os.rename(output_file + ".cache", output_file)

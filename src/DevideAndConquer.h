@@ -167,6 +167,12 @@ void __attribute__ ((noinline)) divide_and_conquer_naive_r5(Matrix<T> &C, const 
 }
 
 template<typename T>
+void __attribute__ ((noinline)) divide_and_conquer_block_sse(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
+    _divide_and_conquer<multiplier_block_wise<T, SSE>>(C, A, B);
+}
+
+
+template<typename T>
 void __attribute__ ((noinline)) divide_and_conquer_block_avx2(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
     _divide_and_conquer<multiplier_block_wise<T, AVX2>>(C, A, B);
 }

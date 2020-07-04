@@ -5,57 +5,10 @@
 #ifndef SMID_MATRIX_REGISTERBLOCKING_H
 #define SMID_MATRIX_REGISTERBLOCKING_H
 
-#include "Matrix.h"
+#include "../Matrix.h"
 #include <immintrin.h>
 
-enum AvxVersion {
-    AVX2,
-
-#ifdef WITH_AVX512
-    AVX512
-#endif
-
-};
-
 namespace detail {
-
-    struct __m256_block_wise_config {
-        using FloatType = float;
-        using VectorType = __m256;
-        static constexpr auto LoadVector = _mm256_loadu_ps;
-        static constexpr auto StoreVector = _mm256_storeu_ps;
-        static constexpr auto BroadcastToVector = _mm256_set1_ps;
-        static constexpr unsigned Registers = 16;
-    };
-
-    struct __m256d_block_wise_config {
-        using FloatType = double;
-        using VectorType = __m256d;
-        static constexpr auto LoadVector = _mm256_loadu_pd;
-        static constexpr auto StoreVector = _mm256_storeu_pd;
-        static constexpr auto BroadcastToVector = _mm256_set1_pd;
-        static constexpr unsigned Registers = 16;
-    };
-
-#ifdef WITH_AVX512
-    struct __m512_block_wise_config {
-        using FloatType = float;
-        using VectorType = __m512;
-        static constexpr auto LoadVector = _mm512_loadu_ps;
-        static constexpr auto StoreVector = _mm512_storeu_ps;
-        static constexpr auto BroadcastToVector = _mm512_set1_ps;
-        static constexpr unsigned Registers = 32;
-    };
-
-    struct __m512d_block_wise_config {
-        using FloatType = double;
-        using VectorType = __m512d;
-        static constexpr auto LoadVector = _mm512_loadu_pd;
-        static constexpr auto StoreVector = _mm512_storeu_pd;
-        static constexpr auto BroadcastToVector = _mm512_set1_pd;
-        static constexpr unsigned Registers = 32;
-    };
-#endif
 
     // maximize = (R * C) / (R + C) for R + R * C < 16 => any fixed r -> largest C with < 16
     // C = floor ((16 - R) / R)
@@ -139,7 +92,7 @@ namespace detail {
 
     template<
             // template parameter as struct: otherwise some warning about losing alignment information warning
-            typename BlockWiseConfig = __m256_block_wise_config
+            typename BlockWiseConfig
     >
     struct block_wise {
 
@@ -298,22 +251,93 @@ namespace detail {
     };
 }
 
+struct __m128_block_wise_config {
+    using FloatType = float;
+    using VectorType = __m128;
+    static constexpr auto LoadVector = _mm_loadu_ps;
+    static constexpr auto StoreVector = _mm_storeu_ps;
+    static constexpr auto BroadcastToVector = _mm_set1_ps;
+    static constexpr unsigned Registers = 16;
+};
+
+struct __m128d_block_wise_config {
+    using FloatType = double;
+    using VectorType = __m128d;
+    static constexpr auto LoadVector = _mm_loadu_pd;
+    static constexpr auto StoreVector = _mm_storeu_pd;
+    static constexpr auto BroadcastToVector = _mm_set1_pd;
+    static constexpr unsigned Registers = 16;
+};
+
+struct __m256_block_wise_config {
+    using FloatType = float;
+    using VectorType = __m256;
+    static constexpr auto LoadVector = _mm256_loadu_ps;
+    static constexpr auto StoreVector = _mm256_storeu_ps;
+    static constexpr auto BroadcastToVector = _mm256_set1_ps;
+    static constexpr unsigned Registers = 16;
+};
+
+struct __m256d_block_wise_config {
+    using FloatType = double;
+    using VectorType = __m256d;
+    static constexpr auto LoadVector = _mm256_loadu_pd;
+    static constexpr auto StoreVector = _mm256_storeu_pd;
+    static constexpr auto BroadcastToVector = _mm256_set1_pd;
+    static constexpr unsigned Registers = 16;
+};
+
+#ifdef WITH_AVX512
+struct __m512_block_wise_config {
+    using FloatType = float;
+    using VectorType = __m512;
+    static constexpr auto LoadVector = _mm512_loadu_ps;
+    static constexpr auto StoreVector = _mm512_storeu_ps;
+    static constexpr auto BroadcastToVector = _mm512_set1_ps;
+    static constexpr unsigned Registers = 32;
+};
+
+struct __m512d_block_wise_config {
+    using FloatType = double;
+    using VectorType = __m512d;
+    static constexpr auto LoadVector = _mm512_loadu_pd;
+    static constexpr auto StoreVector = _mm512_storeu_pd;
+    static constexpr auto BroadcastToVector = _mm512_set1_pd;
+    static constexpr unsigned Registers = 32;
+};
+#endif
+
+enum AvxVersion {
+    SSE,
+    AVX2,
+#ifdef WITH_AVX512
+    AVX512
+#endif
+};
+
 template<typename FloatType, AvxVersion avxVersion>
 struct block_wise;
 
-template<> struct block_wise<float, AVX2> : public detail::block_wise_base<detail::__m256_block_wise_config> {};
-template<> struct block_wise<double, AVX2> : public detail::block_wise_base<detail::__m256d_block_wise_config> {};
+template<> struct block_wise<float, SSE> : public detail::block_wise_base<__m128_block_wise_config> {};
+template<> struct block_wise<double, SSE> : public detail::block_wise_base<__m128d_block_wise_config> {};
+
+template<> struct block_wise<float, AVX2> : public detail::block_wise_base<__m256_block_wise_config> {};
+template<> struct block_wise<double, AVX2> : public detail::block_wise_base<__m256d_block_wise_config> {};
 
 #ifdef WITH_AVX512
-    template<> struct block_wise<float, AVX512> : public detail::block_wise_base<detail::__m512_block_wise_config> {};
-    template<> struct block_wise<double, AVX512> : public detail::block_wise_base<detail::__m512d_block_wise_config> {};
+    template<> struct block_wise<float, AVX512> : public detail::block_wise_base<__m512_block_wise_config> {};
+    template<> struct block_wise<double, AVX512> : public detail::block_wise_base<__m512d_block_wise_config> {};
 #endif
+
+template<typename T>
+void __attribute__ ((noinline)) block_wise_sse(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
+    block_wise<T, SSE>::multiply(C, A, B);
+}
 
 template<typename T>
 void __attribute__ ((noinline)) block_wise_avx2(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
     block_wise<T, AVX2>::multiply(C, A, B);
 }
-
 
 #ifdef WITH_AVX512
 template<typename T>
