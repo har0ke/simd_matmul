@@ -51,7 +51,8 @@ very_slow_functions = ["naive_reordered"]
 slow_functions = ["boost_axpy_mul", "divide_and_conquer_naive_r1"]
 normal_functions = ["block_wise_sse", "block_wise_avx2", "divide_and_conquer_block_sse"]
 fast_functions = ["divide_and_conquer_block_avx2", "blas"]
-avx512_functions = ["block_wise_avx512", "divide_and_conquer_block_avx512"]
+avx512_fast_functions = ["divide_and_conquer_block_avx512"]
+avx512_normal_functions = ["block_wise_avx512"]
 
 if __name__ == '__main__':
     os.chdir(os.path.join(os.path.dirname(__file__), ".."))
@@ -77,6 +78,9 @@ if __name__ == '__main__':
 
     functions = fast_functions
 
+    if options.avx512:
+        functions += avx512_fast_functions
+
     if options.very_slow:
         functions += very_slow_functions
 
@@ -86,8 +90,9 @@ if __name__ == '__main__':
     if options.very_slow or options.slow or options.normal:
         functions += normal_functions
 
-    if options.avx512:
-        functions += avx512_functions
+    if options.avx512 and (options.very_slow or options.slow or options.normal):
+        functions += avx512_normal_functions
+
 
     if options.function:
         functions = options.function
