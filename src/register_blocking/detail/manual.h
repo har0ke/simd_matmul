@@ -1,10 +1,9 @@
 
-
 namespace detail {
 
     template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
     struct RegisterBlocking;
-    
+
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 1> {
     
@@ -40,14 +39,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 2> {
     
@@ -89,14 +80,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 3> {
     
@@ -144,14 +127,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 4> {
     
@@ -205,14 +180,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 5> {
     
@@ -272,14 +239,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 6> {
     
@@ -345,14 +304,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 7> {
     
@@ -424,14 +375,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 8> {
     
@@ -509,14 +452,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 9> {
     
@@ -600,14 +535,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 10> {
     
@@ -697,14 +624,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 11> {
     
@@ -800,14 +719,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 12> {
     
@@ -909,14 +820,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 13> {
     
@@ -1024,14 +927,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 14> {
     
@@ -1145,14 +1040,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 15> {
     
@@ -1272,14 +1159,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 16> {
     
@@ -1405,14 +1284,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 17> {
     
@@ -1544,14 +1415,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 18> {
     
@@ -1689,14 +1552,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 19> {
     
@@ -1840,14 +1695,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 20> {
     
@@ -1997,14 +1844,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 21> {
     
@@ -2160,14 +1999,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 22> {
     
@@ -2329,14 +2160,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 23> {
     
@@ -2504,14 +2327,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 24> {
     
@@ -2685,14 +2500,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 25> {
     
@@ -2872,14 +2679,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 26> {
     
@@ -3065,14 +2864,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 27> {
     
@@ -3264,14 +3055,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 28> {
     
@@ -3469,14 +3252,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 29> {
     
@@ -3680,14 +3455,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 1, 30> {
     
@@ -3897,14 +3664,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 2, 1> {
     
@@ -3948,14 +3707,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 2, 2> {
     
@@ -4010,14 +3761,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 2, 3> {
     
@@ -4083,14 +3826,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 2, 4> {
     
@@ -4167,14 +3902,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 2, 5> {
     
@@ -4262,14 +3989,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 2, 6> {
     
@@ -4368,14 +4087,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 2, 7> {
     
@@ -4485,14 +4196,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 2, 8> {
     
@@ -4613,14 +4316,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 2, 9> {
     
@@ -4752,14 +4447,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 2, 10> {
     
@@ -4902,14 +4589,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 2, 11> {
     
@@ -5063,14 +4742,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 2, 12> {
     
@@ -5235,14 +4906,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 2, 13> {
     
@@ -5418,14 +5081,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 2, 14> {
     
@@ -5612,14 +5267,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 3, 1> {
     
@@ -5671,14 +5318,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 3, 2> {
     
@@ -5746,14 +5385,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 3, 3> {
     
@@ -5837,14 +5468,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 3, 4> {
     
@@ -5944,14 +5567,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 3, 5> {
     
@@ -6067,14 +5682,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 3, 6> {
     
@@ -6206,14 +5813,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 3, 7> {
     
@@ -6361,14 +5960,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 3, 8> {
     
@@ -6532,14 +6123,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 3, 9> {
     
@@ -6719,14 +6302,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 4, 1> {
     
@@ -6786,14 +6361,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 4, 2> {
     
@@ -6874,14 +6441,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 4, 3> {
     
@@ -6983,14 +6542,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 4, 4> {
     
@@ -7113,14 +6664,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 4, 5> {
     
@@ -7264,14 +6807,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 4, 6> {
     
@@ -7436,14 +6971,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 5, 1> {
     
@@ -7511,14 +7038,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 5, 2> {
     
@@ -7612,14 +7131,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 5, 3> {
     
@@ -7739,14 +7250,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 5, 4> {
     
@@ -7892,14 +7395,6 @@ namespace detail {
         }
     };
 
-}
-
-
-namespace detail {
-
-    template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
-    struct RegisterBlocking;
-    
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, 5, 5> {
     
@@ -8070,5 +7565,4 @@ namespace detail {
         
         }
     };
-
 }

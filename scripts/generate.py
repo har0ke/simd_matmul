@@ -1,12 +1,12 @@
 import os
-
-code_template = """
-
+code_prefix = """
 namespace detail {
 
     template<typename BitWiseConfig, unsigned _NumRows, unsigned _NumColumnVectors>
     struct RegisterBlocking;
-    
+"""
+
+code_template = """
     template<typename BitWiseConfig>
     struct RegisterBlocking<BitWiseConfig, %d, %d> {
     
@@ -33,9 +33,9 @@ namespace detail {
         
         }
     };
-
-}
 """
+
+code_postfix = "}"
 
 
 def generate_rows(num_rows, num_columns):
@@ -102,6 +102,8 @@ def get_initial_rows(registers):
 
 fn = os.path.join(os.path.dirname(__file__), "..", "src/register_blocking/detail/manual.h")
 with open(fn, "w") as f:
+    f.write(code_prefix)
     for rows in range(1, get_initial_rows(max_register_count) + 1):
         for columns in range(1, get_initial_column_vectors(rows, max_register_count) + 1):
             f.write(generate_rows(rows, columns))
+    f.write(code_postfix)

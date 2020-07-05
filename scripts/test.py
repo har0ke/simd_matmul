@@ -129,11 +129,11 @@ if __name__ == '__main__':
             
             if not already_dumped:
                 build_path = os.path.join(get_build_path("..", "builds", "simd_multiply", True, clang, options.avx512, options.release, options.no_manual, arguments + extra_args)[1], "simd_multiply")
-                os.system('objdump -d -M intel -S "%s" -C > main_with_source.s' % build_path)
-                os.system('objdump -d -M intel "%s" -C > main_wo_source.s' % build_path)
+                # os.system('objdump -d -M intel -S "%s" -C > main_with_source.s' % build_path)
+                # os.system('objdump -d -M intel "%s" -C > main_wo_source.s' % build_path)
                 upp = os.path.expanduser("~/dup.sh")
-                os.system('bash %s upload main_with_source.s .' % upp)
-                os.system('bash %s upload main_wo_source.s .' % upp)
+                # os.system('bash %s upload main_with_source.s .' % upp)
+                # os.system('bash %s upload main_wo_source.s .' % upp)
                 already_dumped = True
             if "ms\n" in ms:
                 ms = float(ms.split("ms\n")[0])
