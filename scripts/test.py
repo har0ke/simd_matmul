@@ -107,7 +107,7 @@ if __name__ == '__main__':
     clang = not options.gcc
     for sizes in matrix_combinations:
         args = list(sizes)
-        compile_and_run("..", "builds", "generate_random", True, True, options.avx512, options.release, args)
+        compile_and_run("..", "builds", "generate_random", True, clang, options.avx512, options.release, args)
         folder = "x".join(sizes)
         for fidx, function in enumerate(functions):
             arguments = [folder, "--algorithm", function]

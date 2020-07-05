@@ -5,7 +5,7 @@
 #ifndef SMID_MATRIX_BLASMUL_H
 #define SMID_MATRIX_BLASMUL_H
 
-#include <cblas/cblas.h>
+#include <mkl.h>
 #include "Matrix.h"
 
 template<typename T>
