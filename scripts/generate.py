@@ -64,7 +64,7 @@ def generate_rows(num_rows, num_columns):
         for column_index in range(num_columns):
             after_loop.append("AddAndStore(&C(row, column), r%dc%d);" % (row_index, column_index))
             if column_index != num_columns - 1:
-                after_loop.append("column_index += bwc::VectorWidth;")
+                after_loop.append("column += bwc::VectorWidth;")
         if row_index != num_rows - 1:
             after_loop.append("++row_index;")
     print(len(variables) + len(zero_variables))
