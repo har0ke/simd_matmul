@@ -145,7 +145,7 @@ if __name__ == '__main__':
             times[fidx].append(ms)
 
         shutil.rmtree(folder)
-        print(["%.3f" % numpy.mean(ts) for ts in times])
+        print("\n".join("%s: %.3fs" % (f, numpy.mean(ts) / 1000.) for f, ts in sorted(zip(functions, times), key=lambda x: numpy.mean(x[1]))))
         with open(output_file + ".cache", "w") as f:
             json.dump({
                 "extr_args": extra_args,
