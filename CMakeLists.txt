@@ -6,9 +6,13 @@ set(CMAKE_CXX_STANDARD 17)
 option(OPTIMIZE_FOR_NATIVE "Build with -march=native" ON)
 option(USE_CLANG "Build with clang instead of gcc" ON)
 option(WITH_AVX512 "Enable AVX512" OFF)
+option(WITH_MANUAL "Enable MANUAL" ON)
 
 if(WITH_AVX512)
     add_compile_definitions(WITH_AVX512)
+endif()
+if(WITH_MANUAL)
+    add_compile_definitions(WITH_MANUAL)
 endif()
 
 if(USE_CLANG)
