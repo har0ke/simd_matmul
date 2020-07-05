@@ -182,8 +182,30 @@ void __attribute__ ((noinline)) divide_and_conquer_block_avx2(Matrix<T> &C, cons
 #ifdef WITH_AVX512
 template<typename T>
 void __attribute__ ((noinline)) divide_and_conquer_block_avx512(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
-    _divide_and_conquer<multiplier_block_wise<T, AVX512>>(C, A, B);
+    _divide_and_conquer<multiplier_block_wise<T, AVX512, 10, 1, 75>>(C, A, B);
 }
+template<typename T>
+void __attribute__ ((noinline)) divide_and_conquer_block_avx5120(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
+    _divide_and_conquer<multiplier_block_wise<T, AVX512, 10, 1, 75>>(C, A, B);
+}
+template<typename T>
+void __attribute__ ((noinline)) divide_and_conquer_block_avx5121(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
+    _divide_and_conquer<multiplier_block_wise<T, AVX512, 10, 1, 75>>(C, A, B);
+}
+template<typename T>
+void __attribute__ ((noinline)) divide_and_conquer_block_avx5122(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
+    _divide_and_conquer<multiplier_block_wise<T, AVX512, 10, 1, 75>>(C, A, B);
+}
+template<typename T>
+void __attribute__ ((noinline)) divide_and_conquer_block_avx5123(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
+    _divide_and_conquer<multiplier_block_wise<T, AVX512, 10, 1, 75>>(C, A, B);
+}
+template<typename T>
+void __attribute__ ((noinline)) divide_and_conquer_block_avx5124(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
+    _divide_and_conquer<multiplier_block_wise<T, AVX512, 10, 1, 75>>(C, A, B);
+}
+
+
 #endif
 
 #endif //SMID_MATRIX_DEVIDEANDCONQUER_H

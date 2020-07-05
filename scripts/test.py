@@ -30,7 +30,7 @@ def compile_and_run(source_path, build_path_prefix, target, native, use_clang, a
         "-DNDEBUG=ON", "-DBOOST_UBLAS_NDEBUG=ON",
         "-DWITH_AVX512=" + ("ON" if avx512 else "OFF"),
     ]
-    build_path = os.path.join(build_path_prefix, " ".join(flags))
+    build_path = os.path.join(build_path_prefix, " ".join(flags)).replace("-", " ").replace("  ", " ").replace(" ", "_")
     if not os.path.exists(build_path):
         os.makedirs(build_path)
     check_call_quiet(["cmake", "-B", build_path, "-S", source_path] + flags)
@@ -86,7 +86,7 @@ if __name__ == '__main__':
 
     if options.function:
         functions = options.function
-    # functions = ["divide_and_conquer_naive_r1", "divide_and_conquer_naive_r2", "divide_and_conquer_naive_r3", "divide_and_conquer_naive_r4", "divide_and_conquer_naive_r5"]
+    functions = ["divide_and_conquer_block_avx5120", "divide_and_conquer_block_avx5121", "divide_and_conquer_block_avx5122", "divide_and_conquer_block_avx5123", "divide_and_conquer_block_avx512"]
     extra_args = []
     if options.validate:
         extra_args.append("--validate")

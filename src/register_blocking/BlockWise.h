@@ -56,7 +56,7 @@ struct __m512_block_wise_config {
     static constexpr auto LoadVector = _mm512_loadu_ps;
     static constexpr auto StoreVector = _mm512_storeu_ps;
     static constexpr auto BroadcastToVector = _mm512_set1_ps;
-    static constexpr unsigned Registers = 32;
+    static constexpr unsigned Registers = 30;
 };
 
 struct __m512d_block_wise_config {
@@ -65,7 +65,7 @@ struct __m512d_block_wise_config {
     static constexpr auto LoadVector = _mm512_loadu_pd;
     static constexpr auto StoreVector = _mm512_storeu_pd;
     static constexpr auto BroadcastToVector = _mm512_set1_pd;
-    static constexpr unsigned Registers = 32;
+    static constexpr unsigned Registers = 30;
 };
 #endif
 

@@ -64,6 +64,11 @@ int main_work(const std::string &test_function_name, const std::string &input_fo
     TEST_IF(test_function_name, divide_and_conquer_block_avx2, A, B)
 
 #ifdef WITH_AVX512
+    TEST_IF(test_function_name, divide_and_conquer_block_avx5120, A, B)
+    TEST_IF(test_function_name, divide_and_conquer_block_avx5121, A, B)
+    TEST_IF(test_function_name, divide_and_conquer_block_avx5122, A, B)
+    TEST_IF(test_function_name, divide_and_conquer_block_avx5123, A, B)
+
     TEST_IF(test_function_name, divide_and_conquer_block_avx512, A, B)
 #endif
 
