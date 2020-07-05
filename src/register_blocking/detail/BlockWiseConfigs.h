@@ -20,7 +20,7 @@ struct masked_remaining_columns {
         mask = (~mask);
         mask = mask << (n - n_i);
         mask = ~mask;
-        constexpr typename bwc::VectorType zeros = 0.0;
+        constexpr typename bwc::VectorType zeros = { 0.0 };
         typename bwc::VectorType CReg[CurrentNumRows] = { 0.0 };
         for (int p = 0; p < k; p++) {
             typename bwc::VectorType bb = Config::LoadVectorMasked(zeros, mask, &B(p, n_i));
