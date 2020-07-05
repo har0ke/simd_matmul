@@ -20,9 +20,10 @@ struct masked_remaining_columns {
         mask = (~mask);
         mask = mask << (n - n_i);
         mask = ~mask;
+        constexpr typename bwc::VectorType zeros = 0.0;
         typename bwc::VectorType CReg[CurrentNumRows] = { 0.0 };
         for (int p = 0; p < k; p++) {
-            typename bwc::VectorType bb = Config::LoadVectorMasked({ 0.0 }, mask, &B(p, n_i));
+            typename bwc::VectorType bb = Config::LoadVectorMasked(zeros, mask, &B(p, n_i));
             for (int ai = 0; ai < CurrentNumRows; ai++) { // row index in A (handling regsA rows)
                 typename bwc::VectorType aa = bwc::BroadcastToVector(A(m_i + ai, p));
                 CReg[ai] += aa * bb;
@@ -30,7 +31,7 @@ struct masked_remaining_columns {
         }
         for (int ai = 0; ai < CurrentNumRows; ai++) {
             auto memory = &C(m_i + ai, n_i);
-            Config::StoreVectorMasked(memory, mask, Config::LoadVectorMasked({ 0.0 }, mask, memory) + CReg[ai]);
+            Config::StoreVectorMasked(memory, mask, Config::LoadVectorMasked(zeros, mask, memory) + CReg[ai]);
         }
     }
 
