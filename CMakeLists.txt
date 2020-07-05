@@ -6,9 +6,6 @@ set(CMAKE_CXX_STANDARD 17)
 option(OPTIMIZE_FOR_NATIVE "Build with -march=native" ON)
 option(USE_CLANG "Build with clang instead of gcc" ON)
 option(WITH_AVX512 "Enable AVX512" OFF)
-set(DEFAULT_TEST_FUNCTION_NAME "native_reordered" CACHE STRING "default function to run")
-
-add_compile_definitions(DEFAULT_TEST_FUNCTION_NAME="${DEFAULT_TEST_FUNCTION_NAME}")
 
 if(WITH_AVX512)
     add_compile_definitions(WITH_AVX512)
@@ -21,6 +18,8 @@ else()
 endif()
 
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
+set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -O3")
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mfma")
 
 if(OPTIMIZE_FOR_NATIVE)
@@ -49,9 +48,8 @@ endif(BLAS_FOUND)
 
 find_package(Boost REQUIRED COMPONENTS filesystem program_options)
 
-include_directories("${Boost_INCLUDE_DIRS}")
+include_directories("${Boost_INCLUDE_DIRS} ${BLAS_INCLUDE_DIRS}")
 
-message("${Boost_LIBRARIES} ${BLAS_LIBRARIES}")
 add_library(simple_matrix src/Matrix.cpp)
 target_link_libraries(simple_matrix ${Boost_LIBRARIES} ${BLAS_LIBRARIES})
 

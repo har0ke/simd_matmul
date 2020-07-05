@@ -16,13 +16,24 @@ def check_call_quiet(*args, **kwargs):
     output, err = p.communicate()
     rc = p.returncode
     if rc != 0:
-        print(output.decode())
-        print(err.decode())
+        print(output.decode("utf-8"))
+        print(err.decode("utf-8"))
         exit(0)
 
 
-def compile_and_run(source_path, build_path_prefix, target, native, use_clang, avx512, release, args):
+def get_build_path(source_path, build_path_prefix, target, native, use_clang, avx512, release, args):
+    flags = [
+        "-DOPTIMIZE_FOR_NATIVE=" + ("ON" if native else "OFF"),
+        "-DCMAKE_BUILD_TYPE=" + ("Release" if release else "RelWithDebInfo"),
+        "-DUSE_CLANG=" + ("ON" if use_clang else "OFF"),
+        "-DNDEBUG=ON", "-DBOOST_UBLAS_NDEBUG=ON",
+        "-DWITH_AVX512=" + ("ON" if avx512 else "OFF"),
+    ]
+    build_path = os.path.join(build_path_prefix, " ".join(flags)).replace("-", " ").replace("  ", " ").replace(" ", "_")
+    return build_path
 
+
+def compile_and_run(source_path, build_path_prefix, target, native, use_clang, avx512, release, args):
     flags = [
         "-DOPTIMIZE_FOR_NATIVE=" + ("ON" if native else "OFF"),
         "-DCMAKE_BUILD_TYPE=" + ("Release" if release else "RelWithDebInfo"),
@@ -86,7 +97,7 @@ if __name__ == '__main__':
 
     if options.function:
         functions = options.function
-    functions = ["divide_and_conquer_block_avx5120", "divide_and_conquer_block_avx5121", "divide_and_conquer_block_avx5122", "divide_and_conquer_block_avx5123", "divide_and_conquer_block_avx512"]
+    functions = ["divide_and_conquer_block_avx2", "divide_and_conquer_block_avx5120"]#, "divide_and_conquer_block_avx5121", "divide_and_conquer_block_avx5122", "divide_and_conquer_block_avx5123", "divide_and_conquer_block_avx512"]
     extra_args = []
     if options.validate:
         extra_args.append("--validate")
@@ -105,6 +116,7 @@ if __name__ == '__main__':
     times = [[] for f in functions]
     output_file = datetime.now().strftime("%Y.%m.%d_%H-%M-%S.json")
     clang = not options.gcc
+    already_dumped = False
     for sizes in matrix_combinations:
         args = list(sizes)
         compile_and_run("..", "builds", "generate_random", True, clang, options.avx512, options.release, args)
@@ -115,6 +127,15 @@ if __name__ == '__main__':
                 arguments.append("--double")
             output = compile_and_run("..", "builds", "simd_multiply", True, clang, options.avx512, options.release, arguments + extra_args)
             ms = output.decode()[output.decode().find("multiply:") + 10:]
+            
+            if not already_dumped:
+                build_path = os.path.join(get_build_path("..", "builds", "simd_multiply", True, clang, options.avx512, options.release, arguments + extra_args), "simd_multiply")
+                os.system('objdump -d -M intel -S "%s" -C > main_with_source.s' % build_path)
+                os.system('objdump -d -M intel "%s" -C > main_wo_source.s' % build_path)
+                upp = os.path.expanduser("~/dup.sh")
+                os.system('bash %s upload main_with_source.s .' % upp)
+                os.system('bash %s upload main_wo_source.s .' % upp)
+                already_dumped = True
             if "ms\n" in ms:
                 ms = float(ms.split("ms\n")[0])
             else:

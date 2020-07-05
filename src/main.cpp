@@ -115,9 +115,12 @@ int main(int argc, char* argv[]) {
     po::store(po::command_line_parser(argc, argv).
             options(desc).positional(p).run(), vm);
     po::notify(vm);
-
-    std::string test_function_name = vm.count("algorithm") ? vm["algorithm"].as<std::string>() : DEFAULT_TEST_FUNCTION_NAME;
-
+    std::string test_function_name;
+    if (vm.count("algorithm")) {
+        test_function_name = vm["algorithm"].as<std::string>();
+    } else {
+        throw std::runtime_error("missing algorithm");
+    }
     if(vm.count("double")) {
         return main_work<double>(test_function_name, vm["input-folder"].as<std::string>(), vm.count("validate"));
     } else {
