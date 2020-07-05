@@ -57,10 +57,15 @@ def generate_rows(num_rows, num_columns):
         for row_index in range(num_rows):
             loop_lines.append("r%dc%d += r%d * c;" % (row_index, column_index, row_index))
 
+    after_loop.append("size_t row = aRowOffset;")
     for row_index in range(num_rows):
+        after_loop.append("size_t column = bColOffset;")
         for column_index in range(num_columns):
-            after_loop.append("AddAndStore(&C(aRowOffset + %d, bColOffset + %d * bwc::VectorWidth), r%dc%d);" % (row_index, column_index, row_index, column_index))
-
+            after_loop.append("AddAndStore(&C(row, column), r%dc%d);" % (row_index, column_index))
+            if column_index != num_columns - 1:
+                after_loop.append("column_index += bwc::VectorWidth;")
+        if row_index != num_rows - 1:
+            after_loop.append("++row_index;")
     print(len(variables) + len(zero_variables))
     variables_lines = ["typename bwc::VectorType %s;" % variable for variable in variables]
     variables_lines += ["typename bwc::VectorType %s;" % variable for variable in zero_variables]
