@@ -1,6 +1,57 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+import os
+import json
+from pprint import pprint
+
+folder = os.path.join(os.path.dirname(__file__), "data")
+
+files = list(reversed(sorted([os.path.join(folder, fn) for fn in os.listdir(folder) if fn.endswith(".json")])))
+
+
+each_size = {
+    
+}
+functions = set()
+for fn in files:
+    with open(fn) as f:
+        data =json.load(f)
+        if data["total_size"] not in each_size:
+            each_size[data["total_size"]] = {v: k for k, v in zip(data["means"], data["functions"])}
+            functions = functions.union(set(data["functions"]))
+pprint(each_size)
+pprint(functions)
+
+for function in functions:
+    #if function.startswith("divide") and "naive" in function and not (function.endswith("r2") or function.endswith("r3")):
+    #   continue
+    #if not function.startswith("divide_and_conquer_naive"):
+    #    continue
+    if function.startswith("block_wise"):
+        continue
+    x = []
+    y = []
+    for size in sorted(each_size.keys()):
+        values = each_size[size]
+        if function in values:
+            x.append(pow(size, 1.))
+            y.append(float(values[function]) / 1000.)
+    print(x, y)
+    plt.plot(x, y, label=function)
+
+from matplotlib import rc
+
+plt.legend()
+plt.xscale("log")
+plt.grid()
+plt.xlim((1e10, 5.3e11))
+plt.ylim((0, 160))
+plt.savefig("test.pdf")
+plt.xlabel("n * p * m")
+plt.ylabel("seconds")
+plt.show()
+exit(0)
 a = [
 
 [1e6, '0.000', '0.000', '0.000', '0.300', '0.200', '0.250', '0.000', '0.000'],

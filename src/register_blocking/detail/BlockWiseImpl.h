@@ -1,94 +1,13 @@
 //
-// Created by oke on 01.07.20.
+// Created by oke on 04.07.20.
 //
 
-#ifndef SMID_MATRIX_REGISTERBLOCKING_H
-#define SMID_MATRIX_REGISTERBLOCKING_H
+#ifndef SMID_MATRIX_BLOCKWISE_IMPL_H
+#define SMID_MATRIX_BLOCKWISE_IMPL_H
 
-#include "../Matrix.h"
-#include <immintrin.h>
+#include "RegisterBlocking.h"
 
 namespace detail {
-
-    // maximize = (R * C) / (R + C) for R + R * C < 16 => any fixed r -> largest C with < 16
-    // C = floor ((16 - R) / R)
-
-    constexpr unsigned GetInitialColumnVectors(unsigned R, unsigned Registers) {
-        if (R == 0) return 0;
-        return (unsigned) ((double) (Registers - R) / (double) R);
-    }
-
-    constexpr unsigned GetInitialRows(unsigned Registers) {
-        for(unsigned R = Registers; R > 0; --R) {
-            if(R + R * (R + 1) < Registers) {
-                return R;
-            }
-        }
-        return 0;
-    }
-
-
-    template<typename BlockWiseConfig>
-    struct ExtendedBlockWiseConfig {
-        typedef typename BlockWiseConfig::FloatType FloatType;
-        using VectorType = typename BlockWiseConfig::VectorType;
-
-        static constexpr auto Registers = BlockWiseConfig::Registers;
-        static constexpr auto LoadVector = BlockWiseConfig::LoadVector;
-        static constexpr auto StoreVector = BlockWiseConfig::StoreVector;
-        static constexpr auto BroadcastToVector = BlockWiseConfig::BroadcastToVector;
-        static constexpr size_t VectorWidth = sizeof(VectorType) / sizeof(FloatType);
-        static constexpr auto AddAndStore = [](FloatType *memory, VectorType vector) { StoreVector(memory,
-                                                                                                   LoadVector(memory) +
-                                                                                                   vector);
-        };
-    };
-
-    template<
-            // template parameter as struct: otherwise some warning about losing alignment information warning
-            typename BitWiseConfig,
-            unsigned _NumRows, unsigned _NumColumnVectors
-    >
-    struct RegisterBlocking {
-        typedef ExtendedBlockWiseConfig<BitWiseConfig> bwc;
-
-        static constexpr auto AddAndStore = [](typename bwc::FloatType *memory, typename bwc::VectorType vector) {
-            bwc::StoreVector(memory, bwc::LoadVector(memory) + vector);
-        };
-
-        static constexpr auto NumRows = _NumRows;
-        static constexpr auto NumColumns = _NumColumnVectors * bwc::VectorWidth;
-
-        template<typename M1, typename M2, typename M3>
-        static void __attribute__ ((noinline))
-        handle_block(int k, M1 &C, const M2 &A, int aRowOffset, const M3 &B, int bColOffset) {
-
-            // AVX2 has 16 registers
-            // should be compiled as registers (total: regA * regB)
-            typename bwc::VectorType CReg[_NumRows][_NumColumnVectors] = {{0.0}};
-            // iterate over dot-product terms
-            for (int p = 0; p < k; p++) { // row index in B and column index in A (handling all rows/columns)
-                // Perform the DOT product
-                for (int bi = 0;
-                     bi < _NumColumnVectors; bi++) { // column index in B (handling regsB * 'VectorWidth' columns)
-                    typename bwc::VectorType bb = bwc::LoadVector(&B(p, bColOffset + bi * bwc::VectorWidth));
-                    for (int ai = 0; ai < _NumRows; ai++) { // row index in A (handling regsA rows)
-                        typename bwc::VectorType aa = bwc::BroadcastToVector(A(aRowOffset + ai, p));
-                        CReg[ai][bi] += aa * bb;
-                    }
-                }
-            }
-            // total regA * regB + regB registers
-
-            // Accumulate the results into C.
-            for (int ai = 0; ai < _NumRows; ai++) {
-                for (int bi = 0; bi < _NumColumnVectors; bi++) {
-                    AddAndStore(&C(aRowOffset + ai, bColOffset + bi * bwc::VectorWidth), CReg[ai][bi]);
-                }
-            }
-        }
-
-    };
 
     template<
             // template parameter as struct: otherwise some warning about losing alignment information warning
@@ -107,6 +26,7 @@ namespace detail {
             bwc::StoreVector(memory, bwc::LoadVector(memory) + vector);
         };
 
+        /*
         template<typename M1, typename M2, typename M3>
         static void multiply(M1 &C, const M2 &A, const M3 &B) {
             assert(C.size1() == A.size1() && C.size2() == B.size2());
@@ -142,6 +62,7 @@ namespace detail {
                 }
             }
         }
+         */
 
         template<unsigned CurrentNumRows, unsigned CurrentNumColumnVectors>
         class iterate_columns {
@@ -250,100 +171,4 @@ namespace detail {
 
     };
 }
-
-struct __m128_block_wise_config {
-    using FloatType = float;
-    using VectorType = __m128;
-    static constexpr auto LoadVector = _mm_loadu_ps;
-    static constexpr auto StoreVector = _mm_storeu_ps;
-    static constexpr auto BroadcastToVector = _mm_set1_ps;
-    static constexpr unsigned Registers = 16;
-};
-
-struct __m128d_block_wise_config {
-    using FloatType = double;
-    using VectorType = __m128d;
-    static constexpr auto LoadVector = _mm_loadu_pd;
-    static constexpr auto StoreVector = _mm_storeu_pd;
-    static constexpr auto BroadcastToVector = _mm_set1_pd;
-    static constexpr unsigned Registers = 16;
-};
-
-struct __m256_block_wise_config {
-    using FloatType = float;
-    using VectorType = __m256;
-    static constexpr auto LoadVector = _mm256_loadu_ps;
-    static constexpr auto StoreVector = _mm256_storeu_ps;
-    static constexpr auto BroadcastToVector = _mm256_set1_ps;
-    static constexpr unsigned Registers = 16;
-};
-
-struct __m256d_block_wise_config {
-    using FloatType = double;
-    using VectorType = __m256d;
-    static constexpr auto LoadVector = _mm256_loadu_pd;
-    static constexpr auto StoreVector = _mm256_storeu_pd;
-    static constexpr auto BroadcastToVector = _mm256_set1_pd;
-    static constexpr unsigned Registers = 16;
-};
-
-#ifdef WITH_AVX512
-struct __m512_block_wise_config {
-    using FloatType = float;
-    using VectorType = __m512;
-    static constexpr auto LoadVector = _mm512_loadu_ps;
-    static constexpr auto StoreVector = _mm512_storeu_ps;
-    static constexpr auto BroadcastToVector = _mm512_set1_ps;
-    static constexpr unsigned Registers = 32;
-};
-
-struct __m512d_block_wise_config {
-    using FloatType = double;
-    using VectorType = __m512d;
-    static constexpr auto LoadVector = _mm512_loadu_pd;
-    static constexpr auto StoreVector = _mm512_storeu_pd;
-    static constexpr auto BroadcastToVector = _mm512_set1_pd;
-    static constexpr unsigned Registers = 32;
-};
-#endif
-
-enum AvxVersion {
-    SSE,
-    AVX2,
-#ifdef WITH_AVX512
-    AVX512
-#endif
-};
-
-template<typename FloatType, AvxVersion avxVersion>
-struct block_wise;
-
-template<> struct block_wise<float, SSE> : public detail::block_wise_base<__m128_block_wise_config> {};
-template<> struct block_wise<double, SSE> : public detail::block_wise_base<__m128d_block_wise_config> {};
-
-template<> struct block_wise<float, AVX2> : public detail::block_wise_base<__m256_block_wise_config> {};
-template<> struct block_wise<double, AVX2> : public detail::block_wise_base<__m256d_block_wise_config> {};
-
-#ifdef WITH_AVX512
-    template<> struct block_wise<float, AVX512> : public detail::block_wise_base<__m512_block_wise_config> {};
-    template<> struct block_wise<double, AVX512> : public detail::block_wise_base<__m512d_block_wise_config> {};
-#endif
-
-template<typename T>
-void __attribute__ ((noinline)) block_wise_sse(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
-    block_wise<T, SSE>::multiply(C, A, B);
-}
-
-template<typename T>
-void __attribute__ ((noinline)) block_wise_avx2(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
-    block_wise<T, AVX2>::multiply(C, A, B);
-}
-
-#ifdef WITH_AVX512
-template<typename T>
-void __attribute__ ((noinline)) block_wise_avx512(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
-    block_wise<T, AVX512>::multiply(C, A, B);
-}
-#endif
-
-#endif //SMID_MATRIX_REGISTERBLOCKING_H
+#endif // SMID_MATRIX_BLOCKWISE_IMPL_H

@@ -21,10 +21,11 @@ def check_call_quiet(*args, **kwargs):
         exit(0)
 
 
-def compile_and_run(source_path, build_path_prefix, target, native, use_clang, avx512, args):
+def compile_and_run(source_path, build_path_prefix, target, native, use_clang, avx512, release, args):
+
     flags = [
         "-DOPTIMIZE_FOR_NATIVE=" + ("ON" if native else "OFF"),
-        "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
+        "-DCMAKE_BUILD_TYPE=" + ("Release" if release else "RelWithDebInfo"),
         "-DUSE_CLANG=" + ("ON" if use_clang else "OFF"),
         "-DNDEBUG=ON", "-DBOOST_UBLAS_NDEBUG=ON",
         "-DWITH_AVX512=" + ("ON" if avx512 else "OFF"),
@@ -42,8 +43,8 @@ def compile_and_run(source_path, build_path_prefix, target, native, use_clang, a
         output = subprocess.check_output([os.path.join(build_path, target)] + args)
         return output
 
-very_slow_functions = ["naive_reordered", "divide_and_conquer_naive_r4", "divide_and_conquer_naive_r2", "divide_and_conquer_naive_r1"]
-slow_functions = ["boost_axpy_mul", "divide_and_conquer_naive_r3", "divide_and_conquer_naive_r5"]
+very_slow_functions = ["naive_reordered"]
+slow_functions = ["boost_axpy_mul", "divide_and_conquer_naive_r1"]
 normal_functions = ["block_wise_sse", "block_wise_avx2", "divide_and_conquer_block_sse"]
 fast_functions = ["divide_and_conquer_block_avx2", "blas"]
 avx512_functions = ["block_wise_avx512", "divide_and_conquer_block_avx512"]
@@ -65,6 +66,7 @@ if __name__ == '__main__':
     parser.add_argument("--double", action="store_true")
     parser.add_argument("--gcc", action="store_true")
     parser.add_argument("--function", type=str, nargs="*")
+    parser.add_argument("--release", action="store_true")
 
     options = parser.parse_args()
 
@@ -84,14 +86,14 @@ if __name__ == '__main__':
 
     if options.function:
         functions = options.function
-
+    # functions = ["divide_and_conquer_naive_r1", "divide_and_conquer_naive_r2", "divide_and_conquer_naive_r3", "divide_and_conquer_naive_r4", "divide_and_conquer_naive_r5"]
     extra_args = []
     if options.validate:
         extra_args.append("--validate")
     if options.double:
         extra_args.append("--double")
 
-    total = options.total_size
+    total = int(options.total_size)
     matrix_combinations = []
     i = pow(total, 1. / 3.)
     for _ in range(20):
@@ -99,19 +101,19 @@ if __name__ == '__main__':
         b = int(round(max(0.01 * i + 1, numpy.random.normal(i, i / 2))))
         c = int(round(total / a / b))
         matrix_combinations.append([str(a), str(b), str(c)])
-
+   
     times = [[] for f in functions]
     output_file = datetime.now().strftime("%Y.%m.%d_%H-%M-%S.json")
     clang = not options.gcc
     for sizes in matrix_combinations:
         args = list(sizes)
-        compile_and_run("..", "builds", "generate_random", True, True, options.avx512, args)
+        compile_and_run("..", "builds", "generate_random", True, True, options.avx512, options.release, args)
         folder = "x".join(sizes)
         for fidx, function in enumerate(functions):
             arguments = [folder, "--algorithm", function]
             if with_double:
                 arguments.append("--double")
-            output = compile_and_run("..", "builds", "simd_multiply", True, clang, options.avx512, arguments + extra_args)
+            output = compile_and_run("..", "builds", "simd_multiply", True, clang, options.avx512, options.release, arguments + extra_args)
             ms = output.decode()[output.decode().find("multiply:") + 10:]
             if "ms\n" in ms:
                 ms = float(ms.split("ms\n")[0])
@@ -127,6 +129,7 @@ if __name__ == '__main__':
                 "times": times,
                 "sizes": matrix_combinations,
                 "functions": functions,
-                "means": ["%.3f" % numpy.mean(ts) for ts in times]
+                "means": ["%.3f" % numpy.mean(ts) for ts in times],
+                "total_size": total
             }, f)
         os.rename(output_file + ".cache", output_file)

@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cassert>
 #include <boost/program_options.hpp>
-#include "register_blocking/RegisterBlocking.h"
+#include "register_blocking/BlockWise.h"
 #include "Boost.h"
 #include "Naive.h"
 #include "DevideAndConquer.h"

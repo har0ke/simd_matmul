@@ -4,6 +4,8 @@
 
 #ifndef SMID_MATRIX_DEVIDEANDCONQUER_H
 #define SMID_MATRIX_DEVIDEANDCONQUER_H
+
+#include "register_blocking/BlockWise.h"
 #include "Boost.h"
 #include "Naive.h"
 
@@ -107,14 +109,14 @@ struct multiplier_naive_functor {
 };
 
 
-template<typename FloatType, AvxVersion version>
+template<typename FloatType, AvxVersion version, unsigned RowMultiplier = 5, unsigned ColumnMultiplier = 1, unsigned PMultiplier = 20>
 struct multiplier_block_wise : block_wise<FloatType, version> {
 
     typedef block_wise<FloatType, version> Base;
 
-    static constexpr unsigned SplitMultipleM = 5 * Base::NumRows;
-    static constexpr unsigned SplitMultipleP = 20;
-    static constexpr unsigned SplitMultipleN = Base::NumColumns;
+    static constexpr unsigned SplitMultipleM = RowMultiplier * Base::NumRows;
+    static constexpr unsigned SplitMultipleP = PMultiplier;
+    static constexpr unsigned SplitMultipleN = ColumnMultiplier * Base::NumColumns;
 
     static SplitAction action(unsigned m, unsigned p, unsigned n) {
         size_t m_p = m / SplitMultipleM;
@@ -143,27 +145,27 @@ struct multiplier_block_wise : block_wise<FloatType, version> {
 
 template<typename T>
 void __attribute__ ((noinline)) divide_and_conquer_naive_r1(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
-    _divide_and_conquer<multiplier_naive_functor<5, 5>>(C, A, B);
+    _divide_and_conquer<multiplier_naive_functor<40, 40>>(C, A, B);
 }
 
 template<typename T>
 void __attribute__ ((noinline)) divide_and_conquer_naive_r2(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
-    _divide_and_conquer<multiplier_naive_functor<50, 50>>(C, A, B);
+    _divide_and_conquer<multiplier_naive_functor<45, 45>>(C, A, B);
 }
 
 template<typename T>
 void __attribute__ ((noinline)) divide_and_conquer_naive_r3(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
-    _divide_and_conquer<multiplier_naive_functor<200, 200>>(C, A, B);
+    _divide_and_conquer<multiplier_naive_functor<35, 35>>(C, A, B);
 }
 
 template<typename T>
 void __attribute__ ((noinline)) divide_and_conquer_naive_r4(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
-    _divide_and_conquer<multiplier_naive_functor<500, 500>>(C, A, B);
+    _divide_and_conquer<multiplier_naive_functor<30, 30>>(C, A, B);
 }
 
 template<typename T>
 void __attribute__ ((noinline)) divide_and_conquer_naive_r5(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
-    _divide_and_conquer<multiplier_naive_functor<1000, 1000>>(C, A, B);
+    _divide_and_conquer<multiplier_naive_functor<50, 50>>(C, A, B);
 }
 
 template<typename T>
@@ -174,9 +176,8 @@ void __attribute__ ((noinline)) divide_and_conquer_block_sse(Matrix<T> &C, const
 
 template<typename T>
 void __attribute__ ((noinline)) divide_and_conquer_block_avx2(Matrix<T> &C, const Matrix<T> &A, const Matrix<T> &B) {
-    _divide_and_conquer<multiplier_block_wise<T, AVX2>>(C, A, B);
+    _divide_and_conquer<multiplier_block_wise<T, AVX2, 10, 1, 75>>(C, A, B);
 }
-
 
 #ifdef WITH_AVX512
 template<typename T>
