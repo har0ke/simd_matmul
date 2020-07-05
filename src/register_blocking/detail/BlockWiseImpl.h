@@ -7,6 +7,23 @@
 
 #include "RegisterBlocking.h"
 
+template<typename BlockWiseConfig, unsigned CurrentNumRows>
+struct remaining_columns {
+    static constexpr bool IsCustom = false;
+
+    template<typename M1, typename M2, typename M3>
+    static void handle(size_t k, size_t m_i, size_t &n_i, size_t n, M1 &C, const M2 &A, const M3 &B) {
+         for (auto m_i_o = 0; m_i_o < CurrentNumRows; ++m_i_o) {
+            for (int p = 0; p < k; ++p) {
+                for (auto n_i_rest = n_i; n_i_rest < n; ++n_i_rest) {
+                    C(m_i + m_i_o, n_i_rest) += A(m_i + m_i_o, p) * B(p, n_i_rest);
+                }
+            }
+        }
+    }
+};
+
+
 namespace detail {
 
     template<
@@ -89,11 +106,19 @@ namespace detail {
                 } else {
                     // do rest of columns manually
                     if (n_i < n) {
-                        for (auto m_i_o = 0; m_i_o < CurrentNumRows; ++m_i_o) {
-                            for (int p = 0; p < k; ++p) {
-                                for (auto n_i_rest = n_i; n_i_rest < n; ++n_i_rest) {
-                                    C(m_i + m_i_o, n_i_rest) += A(m_i + m_i_o, p) * B(p, n_i_rest);
-                                }
+                        // custom implementation of remaining columns? good, use it.
+                        if constexpr(remaining_columns<BlockWiseConfig, CurrentNumRows>::IsCustom) {
+                            remaining_columns<BlockWiseConfig, CurrentNumRows>::handle(k, m_i, n_i, n, C, A, B);
+                        } else {
+                            // otherwise: has sub_config with less vector width? use this first before going to fallback implementation
+                            if constexpr(BlockWiseConfig::has_sub_config) {
+                                typedef typename BlockWiseConfig::SubConfig SubConfig;
+                                typedef block_wise<SubConfig> SubBlockWise;
+                                typedef typename SubBlockWise::template iterate_columns<CurrentNumRows, GetInitialColumnVectors(
+                                        CurrentNumRows, SubConfig::Registers)> SubIterateColumns;
+                                SubIterateColumns::iterate(k, m_i, n_i, n, C, A, B);
+                            } else {
+                                remaining_columns<BlockWiseConfig, CurrentNumRows>::handle(k, m_i, n_i, n, C, A, B);
                             }
                         }
                     }

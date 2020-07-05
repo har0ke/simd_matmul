@@ -73,6 +73,7 @@ if __name__ == '__main__':
     parser.add_argument("--function", type=str, nargs="*")
     parser.add_argument("--release", action="store_true")
     parser.add_argument("--no_manual", action="store_true")
+    parser.add_argument("--verbose", action="store_true")
 
     options = parser.parse_args()
 
@@ -125,7 +126,9 @@ if __name__ == '__main__':
             if with_double:
                 arguments.append("--double")
             output = compile_and_run("..", "builds", "simd_multiply", True, clang, options.avx512, options.release, options.no_manual, arguments + extra_args)
-            ms = output.decode()[output.decode().find("multiply:") + 10:]
+            if options.verbose:
+                print(output.decode("utf-8"))
+            ms = output.decode()[output.decode("utf-8").find("multiply:") + 10:]
             
             if not already_dumped:
                 build_path = os.path.join(get_build_path("..", "builds", "simd_multiply", True, clang, options.avx512, options.release, options.no_manual, arguments + extra_args)[1], "simd_multiply")

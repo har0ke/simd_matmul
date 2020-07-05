@@ -6,70 +6,7 @@
 #define SMID_MATRIX_BLOCKWISE_H
 
 #include "detail/BlockWiseImpl.h"
-
-#include <immintrin.h>
-
-struct __m128_block_wise_config {
-    using FloatType = float;
-    using VectorType = __m128;
-    static constexpr auto LoadVector = _mm_loadu_ps;
-    static constexpr auto StoreVector = _mm_storeu_ps;
-    static constexpr auto BroadcastToVector = _mm_set1_ps;
-    static constexpr auto XOR = _mm_xor_ps;
-    static constexpr unsigned Registers = 16;
-};
-
-struct __m128d_block_wise_config {
-    using FloatType = double;
-    using VectorType = __m128d;
-    static constexpr auto LoadVector = _mm_loadu_pd;
-    static constexpr auto StoreVector = _mm_storeu_pd;
-    static constexpr auto BroadcastToVector = _mm_set1_pd;
-    static constexpr auto XOR = _mm_xor_pd;
-    static constexpr unsigned Registers = 16;
-};
-
-struct __m256_block_wise_config {
-    using FloatType = float;
-    using VectorType = __m256;
-    static constexpr auto LoadVector = _mm256_loadu_ps;
-    static constexpr auto StoreVector = _mm256_storeu_ps;
-    static constexpr auto BroadcastToVector = _mm256_set1_ps;
-    static constexpr auto XOR = _mm256_xor_ps;
-    static constexpr unsigned Registers = 16;
-};
-
-struct __m256d_block_wise_config {
-    using FloatType = double;
-    using VectorType = __m256d;
-    static constexpr auto LoadVector = _mm256_loadu_pd;
-    static constexpr auto StoreVector = _mm256_storeu_pd;
-    static constexpr auto BroadcastToVector = _mm256_set1_pd;
-    static constexpr auto XOR = _mm256_xor_pd;
-    static constexpr unsigned Registers = 16;
-};
-
-#ifdef WITH_AVX512
-struct __m512_block_wise_config {
-    using FloatType = float;
-    using VectorType = __m512;
-    static constexpr auto LoadVector = _mm512_loadu_ps;
-    static constexpr auto StoreVector = _mm512_storeu_ps;
-    static constexpr auto BroadcastToVector = _mm512_set1_ps;
-    static constexpr auto XOR = _mm512_xor_ps;
-    static constexpr unsigned Registers = 32;
-};
-
-struct __m512d_block_wise_config {
-    using FloatType = double;
-    using VectorType = __m512d;
-    static constexpr auto LoadVector = _mm512_loadu_pd;
-    static constexpr auto StoreVector = _mm512_storeu_pd;
-    static constexpr auto BroadcastToVector = _mm512_set1_pd;
-    static constexpr auto XOR = _mm512_xor_pd;
-    static constexpr unsigned Registers = 32;
-};
-#endif
+#include "detail/BlockWiseConfigs.h"
 
 enum AvxVersion {
     SSE,
