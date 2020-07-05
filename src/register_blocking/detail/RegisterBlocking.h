@@ -7,6 +7,7 @@
 
 #include "../../Matrix.h"
 #include "ExtendedBlockWiseConfig.h"
+#include "manual.h"
 
 namespace detail {
 
