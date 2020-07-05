@@ -66,7 +66,7 @@ def generate_rows(num_rows, num_columns):
             if column_index != num_columns - 1:
                 after_loop.append("column += bwc::VectorWidth;")
         if row_index != num_rows - 1:
-            after_loop.append("++row_index;")
+            after_loop.append("++row;")
     print(len(variables) + len(zero_variables))
     variables_lines = ["typename bwc::VectorType %s;" % variable for variable in variables]
     variables_lines += ["typename bwc::VectorType %s;" % variable for variable in zero_variables]
