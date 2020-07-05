@@ -36,7 +36,7 @@ struct __m256_block_wise_config {
     static constexpr auto StoreVector = _mm256_storeu_ps;
     static constexpr auto BroadcastToVector = _mm256_set1_ps;
     static constexpr auto XOR = _mm256_xor_ps;
-    static constexpr unsigned Registers = 32;
+    static constexpr unsigned Registers = 16;
 };
 
 struct __m256d_block_wise_config {
@@ -46,7 +46,7 @@ struct __m256d_block_wise_config {
     static constexpr auto StoreVector = _mm256_storeu_pd;
     static constexpr auto BroadcastToVector = _mm256_set1_pd;
     static constexpr auto XOR = _mm256_xor_pd;
-    static constexpr unsigned Registers = 32;
+    static constexpr unsigned Registers = 16;
 };
 
 #ifdef WITH_AVX512
@@ -56,7 +56,8 @@ struct __m512_block_wise_config {
     static constexpr auto LoadVector = _mm512_loadu_ps;
     static constexpr auto StoreVector = _mm512_storeu_ps;
     static constexpr auto BroadcastToVector = _mm512_set1_ps;
-    static constexpr unsigned Registers = 30;
+    static constexpr auto XOR = _mm512_xor_ps;
+    static constexpr unsigned Registers = 32;
 };
 
 struct __m512d_block_wise_config {
@@ -65,7 +66,8 @@ struct __m512d_block_wise_config {
     static constexpr auto LoadVector = _mm512_loadu_pd;
     static constexpr auto StoreVector = _mm512_storeu_pd;
     static constexpr auto BroadcastToVector = _mm512_set1_pd;
-    static constexpr unsigned Registers = 16;
+    static constexpr auto XOR = _mm512_xor_pd;
+    static constexpr unsigned Registers = 32;
 };
 #endif
 

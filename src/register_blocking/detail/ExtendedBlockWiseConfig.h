@@ -28,7 +28,7 @@ struct ExtendedBlockWiseConfig {
 // maximize = (R * C) / (R + C) for  1 + R + R * C < 16 => any fixed r -> largest C with < 16
 // C = floor ((16 - R) / R)
 
-unsigned constexpr extra_registers = 2;
+unsigned constexpr extra_registers = 1;
 
 
 constexpr unsigned GetInitialColumnVectors(unsigned R, unsigned Registers) {
