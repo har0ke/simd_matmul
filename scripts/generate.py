@@ -1,4 +1,4 @@
-import itertools
+import os
 
 code_template = """
 
@@ -58,8 +58,9 @@ def generate_rows(num_rows, num_columns):
             loop_lines.append("r%dc%d += r%d * c;" % (row_index, column_index, row_index))
 
     after_loop.append("size_t row = aRowOffset;")
+    after_loop.append("size_t column;")
     for row_index in range(num_rows):
-        after_loop.append("size_t column = bColOffset;")
+        after_loop.append("column = bColOffset;")
         for column_index in range(num_columns):
             after_loop.append("AddAndStore(&C(row, column), r%dc%d);" % (row_index, column_index))
             if column_index != num_columns - 1:
@@ -82,6 +83,7 @@ max_register_count = 32
 
 extra_registers = 1
 
+
 def get_initial_column_vectors(rows, registers):
     if rows == 0:
         return 0
@@ -98,7 +100,8 @@ def get_initial_rows(registers):
     return 0
 
 
-with open("manual.h", "w") as f:
+fn = os.path.join(os.path.dirname(__file__), "..", "src/register_blocking/detail/manual.h")
+with open(fn, "w") as f:
     for rows in range(1, get_initial_rows(max_register_count) + 1):
         for columns in range(1, get_initial_column_vectors(rows, max_register_count) + 1):
             f.write(generate_rows(rows, columns))

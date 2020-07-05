@@ -33,7 +33,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
         
         }
@@ -79,7 +80,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -131,7 +133,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -189,7 +192,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -253,7 +257,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -323,7 +328,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -399,7 +405,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -481,7 +488,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -569,7 +577,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -663,7 +672,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -763,7 +773,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -869,7 +880,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -981,7 +993,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -1099,7 +1112,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -1223,7 +1237,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -1353,7 +1368,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -1489,7 +1505,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -1631,7 +1648,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -1779,7 +1797,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -1933,7 +1952,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -2093,7 +2113,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -2259,7 +2280,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -2431,7 +2453,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -2609,7 +2632,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -2793,7 +2817,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -2983,7 +3008,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -3179,7 +3205,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -3381,7 +3408,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -3589,7 +3617,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -3803,7 +3832,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -3908,10 +3938,11 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
         
         }
@@ -3965,12 +3996,13 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -4033,14 +4065,15 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c2);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -4112,7 +4145,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -4121,7 +4155,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c3);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -4202,7 +4236,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -4213,7 +4248,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c4);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -4303,7 +4338,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -4316,7 +4352,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c5);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -4415,7 +4451,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -4430,7 +4467,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c6);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -4538,7 +4575,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -4555,7 +4593,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c7);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -4672,7 +4710,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -4691,7 +4730,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c8);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -4817,7 +4856,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -4838,7 +4878,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c9);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -4973,7 +5013,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -4996,7 +5037,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c10);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -5140,7 +5181,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -5165,7 +5207,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c11);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -5318,7 +5360,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -5345,7 +5388,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c12);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -5507,7 +5550,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -5536,7 +5580,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c13);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -5614,13 +5658,14 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
         
         }
@@ -5682,17 +5727,18 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c1);
@@ -5766,21 +5812,22 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c2);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c2);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c1);
@@ -5866,7 +5913,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -5875,7 +5923,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c3);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -5884,7 +5932,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c3);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c1);
@@ -5982,7 +6030,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -5993,7 +6042,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c4);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -6004,7 +6053,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c4);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c1);
@@ -6114,7 +6163,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -6127,7 +6177,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c5);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -6140,7 +6190,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c5);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c1);
@@ -6262,7 +6312,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -6277,7 +6328,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c6);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -6292,7 +6343,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c6);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c1);
@@ -6426,7 +6477,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -6443,7 +6495,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c7);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -6460,7 +6512,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c7);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c1);
@@ -6606,7 +6658,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -6625,7 +6678,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c8);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -6644,7 +6697,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c8);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c1);
@@ -6717,16 +6770,17 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r3c0);
         
         }
@@ -6796,22 +6850,23 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c1);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r3c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r3c1);
@@ -6896,28 +6951,29 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c2);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c2);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c1);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c2);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r3c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r3c1);
@@ -7017,7 +7073,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -7026,7 +7083,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c3);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -7035,7 +7092,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c3);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c1);
@@ -7044,7 +7101,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c3);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r3c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r3c1);
@@ -7159,7 +7216,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -7170,7 +7228,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c4);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -7181,7 +7239,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c4);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c1);
@@ -7192,7 +7250,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c4);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r3c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r3c1);
@@ -7322,7 +7380,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -7335,7 +7394,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c5);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -7348,7 +7407,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c5);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c1);
@@ -7361,7 +7420,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c5);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r3c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r3c1);
@@ -7433,19 +7492,20 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r3c0);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r4c0);
         
         }
@@ -7523,27 +7583,28 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c1);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r3c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r3c1);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r4c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r4c1);
@@ -7639,35 +7700,36 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c2);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c2);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c1);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c2);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r3c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r3c1);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r3c2);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r4c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r4c1);
@@ -7781,7 +7843,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -7790,7 +7853,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c3);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -7799,7 +7862,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c3);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c1);
@@ -7808,7 +7871,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c3);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r3c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r3c1);
@@ -7817,7 +7880,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r3c3);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r4c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r4c1);
@@ -7949,7 +8012,8 @@ namespace detail {
             }
             
             size_t row = aRowOffset;
-            size_t column = bColOffset;
+            size_t column;
+            column = bColOffset;
             AddAndStore(&C(row, column), r0c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c1);
@@ -7960,7 +8024,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r0c4);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r1c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c1);
@@ -7971,7 +8035,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r1c4);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r2c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c1);
@@ -7982,7 +8046,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r2c4);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r3c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r3c1);
@@ -7993,7 +8057,7 @@ namespace detail {
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r3c4);
             ++row_index;
-            size_t column = bColOffset;
+            column = bColOffset;
             AddAndStore(&C(row, column), r4c0);
             column_index += bwc::VectorWidth;
             AddAndStore(&C(row, column), r4c1);
