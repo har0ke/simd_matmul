@@ -153,6 +153,7 @@ if __name__ == '__main__':
                 "sizes": matrix_combinations,
                 "functions": functions,
                 "means": ["%.3f" % numpy.mean(ts) for ts in times],
-                "total_size": total
+                "total_size": total,
+                "arguments": options.__dict__
             }, f)
         os.rename(output_file + ".cache", output_file)
